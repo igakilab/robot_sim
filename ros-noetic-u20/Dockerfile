@@ -63,6 +63,13 @@ RUN sudo apt-get install -y --no-install-recommends ros-noetic-cv-camera \
 RUN sudo apt-get -y clean \
     && sudo rm -rf /var/lib/apt/lists/*
 
+#init ws
+COPY ./init_workspace.sh /home/ubuntu/setup_robot_programming/init_workspace.sh
+RUN sudo chmod +x ~/setup_robot_programming/init_workspace.sh && bash ~/setup_robot_programming/init_workspace.sh
+
+COPY ./install_sigverse.sh /home/ubuntu/setup_robot_programming/install_sigverse.sh
+RUN sudo chmod +x ~/setup_robot_programming/install_sigverse.sh && bash ~/setup_robot_programming/install_sigverse.sh
+
 #RUN ./install_basic_packages.sh \
 #    && ./install_python_packages.sh \
 #    && ./install_ros_packages.sh \
@@ -74,4 +81,3 @@ ENV LANG ja_JP.UTF-8
 
 ENV DISPLAY host.docker.internal:0.0
 
-CMD ["/bin/bash"]

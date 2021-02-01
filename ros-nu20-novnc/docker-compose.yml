@@ -1,0 +1,37 @@
+version: '3'
+services:
+  ros-nu20:
+    restart: always
+    container_name: ros-nu20
+    build: .
+    working_dir: "/work"
+    volumes:
+      - ./:/work
+    ports:
+      - "11311:11311"
+    depends_on:
+      - gui
+    command:
+      - roscore
+
+  ros-nu20-2:
+    restart: always
+    container_name: rviz
+    build: .
+    working_dir: "/work"
+    volumes:
+      - ./:/work
+    environment:
+      - ROS_HOSTNAME=panda-demo
+      - ROS_MASTER_URI=http://ros-nu20:11311
+      - DISPLAY=gui:0.0
+    depends_on:
+      - ros-nu20
+      - gui
+    command:
+      - rviz
+
+  gui:
+    image: gramaziokohler/novnc:latest
+    ports:
+      - "8080:8080"

@@ -1,4 +1,4 @@
-FROM ros:noetic-ros-base
+FROM ros:melodic-ros-base
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -39,25 +39,25 @@ RUN sudo /usr/bin/python3 -m pip install pylint -U \
 #	&& sudo /usr/bin/python2 -m pip install autoflake -U \
 
 #ros Packages
-RUN sudo apt-get install -y --no-install-recommends ros-noetic-cv-camera \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-image-transport \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-image-transport-plugins \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-joint-state-publisher-gui \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-joy \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-laser-filters \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-laser-pipeline \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-map-server \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-mouse-teleop \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-navigation \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-robot-state-publisher \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-rosbash \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-rviz \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-slam-gmapping \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-stage-ros \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-rosbridge-suite \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-teleop-twist-joy \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-teleop-twist-keyboard \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-xacro
+RUN sudo apt-get install -y --no-install-recommends ros-melodic-cv-camera \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-image-transport \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-image-transport-plugins \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-joint-state-publisher-gui \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-joy \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-laser-filters \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-laser-pipeline \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-map-server \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-mouse-teleop \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-navigation \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-robot-state-publisher \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-rosbash \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-rviz \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-slam-gmapping \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-stage-ros \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-rosbridge-suite \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-teleop-twist-joy \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-teleop-twist-keyboard \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-xacro
 
 #Clean
 RUN sudo apt-get -y clean \

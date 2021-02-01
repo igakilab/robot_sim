@@ -1,0 +1,13 @@
+version: '3'
+services:
+  ros-desktop:
+    restart: always
+    container_name: ros-desktop
+    build: .
+    working_dir: "/work"
+    volumes:
+      - ./:/work
+    ports:
+      - "8080:80"
+    environment:
+      - shm-size="512m"

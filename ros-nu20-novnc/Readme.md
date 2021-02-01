@@ -34,3 +34,9 @@ $ docker-compose down
 - vscodeとの連携
   - Windows側にvscodeをインストールして，Remote Developmentで接続して実装する方法を試してみたい．他にはjupyterやブラウザベースのvscode風のツールを導入して実装できるようにしている既存事例もあり．
   - https://qiita.com/yosuke@github/items/328dbd778047499828f2#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
+
+### 参考文献
+- https://github.com/gramaziokohler/ros_docker/blob/master/README.md
+  - 基本ここのを流用．
+  - これが理解できたら開発環境もなんとかなるかも．
+    - https://github.com/gramaziokohler/ros_docker/blob/master/examples/moveit-dev/docker-compose.yml

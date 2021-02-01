@@ -22,7 +22,7 @@ services:
     volumes:
       - ./:/work
     environment:
-      - ROS_HOSTNAME=panda-demo
+      - ROS_HOSTNAME=rviz
       - ROS_MASTER_URI=http://ros-nu20:11311
       - DISPLAY=gui:0.0
     depends_on:

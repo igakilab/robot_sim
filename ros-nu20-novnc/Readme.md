@@ -23,6 +23,7 @@ $ docker-compose down
 - rvizコンテナ（rvizコマンド実行するだけ）で実行されているrvizの画面が表示される
 
 ### ToDo
+- `install_sigverse.sh` の `catkin_make`コマンドだけDockerfile内で実行できなかった（Not foundになる）ので，ログイン後手動で実行する必要あり．
 - ノードを追加したかったらどうすればよいか
   - ros-nu20に下記のコマンドでアクセスしてノードを実装してコマンド実行したらrvizの画面に反映されるかどうか
   - `docker exec -it ros-nu20 bash`

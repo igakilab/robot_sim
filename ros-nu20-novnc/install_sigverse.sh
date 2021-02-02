@@ -1,4 +1,10 @@
 #!/bin/bash
+
+TARGET_ROS="noetic"
+echo "**Making workspace. Target ros-${TARGET_ROS}**"
+ROS_SETUP="/opt/ros/${TARGET_ROS}/setup.bash"
+source ${ROS_SETUP}
+
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends xterm
 cd
@@ -20,5 +26,5 @@ sudo make install
 
 cd ~/catkin_ws/src
 git clone https://github.com/SIGVerse/sigverse_ros_package.git
-#cd ..
-#catkin_make
+cd ..
+catkin_make

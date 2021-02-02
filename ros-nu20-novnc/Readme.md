@@ -5,7 +5,7 @@
   - rvizを実行するコンテナ．中身はros-nu20と同じ
 - guiコンテナ
   - rvizを実行した画面をnovncに流して表示するコンテナ
-  
+
 ### 実行方法
 ```sh
 $ cd ros-nu20-novnc
@@ -24,16 +24,24 @@ $ docker-compose down
 
 ### ToDo
 - `install_sigverse.sh` の `catkin_make`コマンドだけDockerfile内で実行できなかった（Not foundになる）ので，ログイン後手動で実行する必要あり．
+  - ↓を追加したらいけたヽ(^o^)丿
+```sh
+TARGET_ROS="noetic"
+echo "**Making workspace. Target ros-${TARGET_ROS}**"
+ROS_SETUP="/opt/ros/${TARGET_ROS}/setup.bash"
+source ${ROS_SETUP}
+```
 - ノードを追加したかったらどうすればよいか
   - ros-nu20に下記のコマンドでアクセスしてノードを実装してコマンド実行したらrvizの画面に反映されるかどうか
   - `docker exec -it ros-nu20 bash`
-- roscoreを再起動したい場合は docker-compose down するしかない？
+- roscoreを再起動したい場合は docker-compose down かrestartするしかない？
 - workディレクトリにスクリプト置いておいて，それを参照して自動的にノードのコマンドを実行するみたいな運用にできないかどうか
 - SIGVerseと連携できるかどうか
   - いまいちやり方が分かってない
 - vscodeとの連携
   - Windows側にvscodeをインストールして，Remote Developmentで接続して実装する方法を試してみたい．他にはjupyterやブラウザベースのvscode風のツールを導入して実装できるようにしている既存事例もあり．
   - https://qiita.com/yosuke@github/items/328dbd778047499828f2#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
+  - eclipse theiaのほうが筋がよさそう（ブラウザでvscode風のIDEで開発できる）
 
 ### 参考文献
 - https://github.com/gramaziokohler/ros_docker/blob/master/README.md

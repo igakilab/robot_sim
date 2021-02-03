@@ -24,6 +24,7 @@ $ docker-compose down
 
 ### Done
 - ~/catkin_ws を永続化し，初期化するように修正してみた
+  - ボリュームの中身を一度全部消したい場合は `docker-compose down --rmi local --volumes --remove-orphans` このあたりでvolume削除すればOK
 - `install_sigverse.sh` の `catkin_make`コマンドだけDockerfile内で実行できなかった（Not foundになる）ので，ログイン後手動で実行する必要あり．
   - ↓を追加したらいけたヽ(^o^)丿
 ```sh

@@ -22,7 +22,9 @@ $ docker-compose down
 
 ### アクセス方法
 - `docker-compose up -d` をホストで実行した後，http://localhost:8080/vnc.html?resize=scale&autoconnect=true にブラウザでアクセスする
-- rvizコンテナ（rvizコマンド実行するだけ）で実行されているrvizの画面が表示される
+  - rvizコンテナ（rvizコマンド実行するだけ）で実行されているrvizの画面が表示される
+- ros プログラム自体は `docker exec -it ros-nu20 bash` でros-nu20コンテナにアクセスし `~/catkin_ws` 内に実装してノードを追加する等すればいけるはず（多分）
+  - 複数のターミナルを開く場合はWindows Terminalなどで↑のexecを複数回実行すればいける気がするが未確認
 
 ### Done
 - ~/catkin_ws を永続化し，初期化するように修正してみた

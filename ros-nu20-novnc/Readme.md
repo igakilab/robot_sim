@@ -1,9 +1,11 @@
 - ros:melodicからsigverseまでセットアップしたDockerfileを利用している
 - ros-nu20コンテナ
   - roscoreを実行するコンテナ
+  - ~/catkin_ws がある
 - rvizコンテナ
-  - rvizを実行するコンテナ．中身はros-nu20と同じ
-- guiコンテナ
+  - rvizを実行するコンテナ．中身はros-nu20とほぼ同じ
+  - ~/catkin_ws はない
+- novncコンテナ
   - rvizを実行した画面をnovncに流して表示するコンテナ
 
 ### 実行方法
@@ -22,7 +24,9 @@ $ docker-compose down
 - `docker-compose up -d` をホストで実行した後，http://localhost:8080/vnc.html?resize=scale&autoconnect=true にブラウザでアクセスする
 - rvizコンテナ（rvizコマンド実行するだけ）で実行されているrvizの画面が表示される
 
-### ToDo
+### Done
+- ~/catkin_ws を永続化し，初期化するように修正してみた
+  - ボリュームの中身を一度全部消したい場合は `docker-compose down --rmi local --volumes --remove-orphans` このあたりでvolume削除すればOK
 - `install_sigverse.sh` の `catkin_make`コマンドだけDockerfile内で実行できなかった（Not foundになる）ので，ログイン後手動で実行する必要あり．
   - ↓を追加したらいけたヽ(^o^)丿
 ```sh
@@ -31,6 +35,8 @@ echo "**Making workspace. Target ros-${TARGET_ROS}**"
 ROS_SETUP="/opt/ros/${TARGET_ROS}/setup.bash"
 source ${ROS_SETUP}
 ```
+
+### ToDo
 - ノードを追加したかったらどうすればよいか
   - ros-nu20に下記のコマンドでアクセスしてノードを実装してコマンド実行したらrvizの画面に反映されるかどうか
   - `docker exec -it ros-nu20 bash`

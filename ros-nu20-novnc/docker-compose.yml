@@ -4,34 +4,36 @@ services:
     restart: always
     container_name: ros-nu20
     build: .
-    working_dir: "/work"
     volumes:
-      - ./:/work
+      - catkin_ws:/catkin_ws
     ports:
       - "11311:11311"
     depends_on:
-      - gui
+      - novnc
     command:
+      - /home/ubuntu/setup_robot_programming/entrypoint.sh
       - roscore
 
-  ros-nu20-2:
+  rviz:
     restart: always
     container_name: rviz
     build: .
-    working_dir: "/work"
     volumes:
-      - ./:/work
+      - catkin_ws:/catkin_ws
     environment:
       - ROS_HOSTNAME=rviz
       - ROS_MASTER_URI=http://ros-nu20:11311
-      - DISPLAY=gui:0.0
+      - DISPLAY=novnc:0.0
     depends_on:
       - ros-nu20
-      - gui
+      - novnc
     command:
       - rviz
 
-  gui:
+  novnc:
     image: gramaziokohler/novnc:latest
     ports:
       - "8080:8080"
+
+volumes:
+  catkin_ws:

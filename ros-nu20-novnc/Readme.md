@@ -22,7 +22,8 @@ $ docker-compose down
 - `docker-compose up -d` をホストで実行した後，http://localhost:8080/vnc.html?resize=scale&autoconnect=true にブラウザでアクセスする
 - rvizコンテナ（rvizコマンド実行するだけ）で実行されているrvizの画面が表示される
 
-### ToDo
+### Done
+- ~/catkin_ws を永続化し，初期化するように修正してみた
 - `install_sigverse.sh` の `catkin_make`コマンドだけDockerfile内で実行できなかった（Not foundになる）ので，ログイン後手動で実行する必要あり．
   - ↓を追加したらいけたヽ(^o^)丿
 ```sh
@@ -31,6 +32,8 @@ echo "**Making workspace. Target ros-${TARGET_ROS}**"
 ROS_SETUP="/opt/ros/${TARGET_ROS}/setup.bash"
 source ${ROS_SETUP}
 ```
+
+### ToDo
 - ノードを追加したかったらどうすればよいか
   - ros-nu20に下記のコマンドでアクセスしてノードを実装してコマンド実行したらrvizの画面に反映されるかどうか
   - `docker exec -it ros-nu20 bash`

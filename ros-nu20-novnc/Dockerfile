@@ -11,23 +11,19 @@ RUN sed -i 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.l
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN locale-gen ja_JP.UTF-8 && useradd --create-home --home-dir /home/ubuntu --shell /bin/bash --user-group --groups adm,sudo ubuntu && \
+RUN useradd --create-home --home-dir /home/ubuntu --shell /bin/bash --user-group --groups adm,sudo ubuntu && \
     echo ubuntu:ubuntu | chpasswd && \
     echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER ubuntu
-RUN sudo apt update
-RUN sudo apt-get install -y iputils-ping net-tools x11-apps
-
-#RUN git clone https://github.com/KMiyawaki/setup_robot_programming.git /home/ubuntu/setup_robot_programming
 
 WORKDIR /home/ubuntu/setup_robot_programming
 
 #Basic Package
 RUN sudo apt-get update -y && sudo apt-get upgrade -y
 RUN sudo apt-get install -y --no-install-recommends curl python3-pip python3-setuptools zip unzip
+RUN sudo apt-get install -y iputils-ping net-tools x11-apps 
 # Unable to locate package python-pip 
-#sudo apt-get install -y --no-install-recommends openssh-server
-#sudo apt-get install -y --no-install-recommends x11-apps x11-utils x11-xserver-utils dbus-x11
+#sudo apt-get install -y --no-install-recommends openssh-server x11-xserver-utils dbus-x11
 
 #Python Packages
 RUN sudo apt-get install -y --no-install-recommends python-tk
@@ -70,14 +66,11 @@ RUN sudo chmod +x ~/setup_robot_programming/init_workspace.sh && bash ~/setup_ro
 COPY ./install_sigverse.sh /home/ubuntu/setup_robot_programming/install_sigverse.sh
 RUN sudo chmod +x ~/setup_robot_programming/install_sigverse.sh && bash ~/setup_robot_programming/install_sigverse.sh
 
-#RUN ./install_basic_packages.sh \
-#    && ./install_python_packages.sh \
-#    && ./install_ros_packages.sh \
-#    && ./install_vscode_extensions_from_file.sh \
-#    && ./upgrade_packages.sh \
-#    && ./init_workspace.sh  \
-#    && 
-ENV LANG ja_JP.UTF-8
-ENV LIBGL_ALWAYS_INDIRECT=0
-ENV DISPLAY host.docker.internal:0.0
+#ENV LANG ja_JP.UTF-8
+#ENV LIBGL_ALWAYS_INDIRECT=0
+#ENV DISPLAY host.docker.internal:0.0
 
+#Reference
+# Timezone https://qiita.com/rururu_kenken/items/972314402d588e073d40
+# https://github.com/KMiyawaki/setup_robot_programming
+# OpenGL https://b.ueda.tech/?post=20190802

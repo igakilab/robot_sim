@@ -77,6 +77,8 @@ RUN sudo chmod +x ~/setup_robot_programming/entrypoint.sh
 #ENV DISPLAY host.docker.internal:0.0
 
 RUN sudo apt-get install -y rsync
+WORKDIR /home/ubuntu
+
 #ENTRYPOINT [ "/home/ubuntu/setup_robot_programming/entrypoint.sh" ]
 
 #Reference

@@ -1,9 +1,11 @@
 - ros:melodicからsigverseまでセットアップしたDockerfileを利用している
 - ros-nu20コンテナ
   - roscoreを実行するコンテナ
+  - ~/catkin_ws がある
 - rvizコンテナ
-  - rvizを実行するコンテナ．中身はros-nu20と同じ
-- guiコンテナ
+  - rvizを実行するコンテナ．中身はros-nu20とほぼ同じ
+  - ~/catkin_ws はない
+- novncコンテナ
   - rvizを実行した画面をnovncに流して表示するコンテナ
 
 ### 実行方法

@@ -28,7 +28,8 @@ services:
       - ros-nu20
       - novnc
     command:
-      - rviz
+      - /home/ubuntu/setup_robot_programming/entrypoint.sh
+      - roscore
 
   novnc:
     image: gramaziokohler/novnc:latest

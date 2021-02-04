@@ -1,0 +1,20 @@
+version: '3'
+services:
+  noeticvnc:
+    restart: always
+    container_name: noeticvnc
+    build: .
+    volumes:
+      - catkin_ws:/catkin_ws
+    ports:
+      - "8080:80"
+      - "5900:5900"
+    environment:
+      - shm-size="512m"
+      - RESOLUTION=1024x768
+      - USER=ubuntu
+    #command:
+      #- /home/ubuntu/setup_robot_programming/entrypoint.sh
+
+volumes:
+  catkin_ws:

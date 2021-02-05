@@ -24,6 +24,8 @@ sudo make EP_mnmlstc_core
 make
 sudo make install
 
+mkdir -p /catkin_ws/src && cd /catkin_ws/src && catkin_init_workspace || true
+
 #cd ~/catkin_ws/src
 #git clone https://github.com/SIGVerse/sigverse_ros_package.git
 #cd ..

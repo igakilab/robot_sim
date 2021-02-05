@@ -77,8 +77,8 @@ RUN sudo chmod +x ~/setup_robot_programming/install_sigverse.sh && bash ~/setup_
 RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/setup_robot_programming/
 RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
 
-COPY ./entrypoint.sh /home/ubuntu/setup_robot_programming/entrypoint.sh
-RUN sudo chmod +x ~/setup_robot_programming/entrypoint.sh
+#COPY ./entrypoint.sh /home/ubuntu/setup_robot_programming/entrypoint.sh
+#RUN sudo chmod +x ~/setup_robot_programming/entrypoint.sh
 
 # Override entrypoint file
 USER root

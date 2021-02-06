@@ -73,14 +73,17 @@ RUN sudo chmod +x ~/setup_robot_programming/install_sigverse.sh && bash ~/setup_
 RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/setup_robot_programming/
 RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
 
-RUN sudo apt-get install -y openssh-server
-RUN sudo mkdir -p /var/run/sshd
-COPY ssh.conf /etc/supervisor/conf.d/ssh.conf
+#RUN sudo apt-get install -y openssh-server
+#RUN sudo mkdir -p /var/run/sshd
+#COPY ssh.conf /etc/supervisor/conf.d/ssh.conf
 
 # Override entrypoint file
-USER root
+#USER root
+RUN sudo apt-get install -y gosu
 COPY ./startup.sh /startup.sh
-RUN sudo chmod +x /startup.sh
+RUN sudo chmod u+x /startup.sh
+
+WORKDIR /home/ubuntu/setup_robot_programming
 
 
 #ENV LANG ja_JP.UTF-8

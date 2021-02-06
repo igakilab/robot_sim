@@ -21,16 +21,20 @@ $ docker-compose down
   - RealVNCで動作検証済み．コピペ等も問題なくできるっぽい
   - https://www.realvnc.com/en/connect/download/viewer/
 - localhost:2000でsshdがListenしているので，sshクライアントでubuntu:ubuntuにアクセスできる．
+- `docker exec -it --user ubuntu noeticvnc bash` でubuntuユーザでbashでログインできる
 
 ### ToDo
 - sigverseとの連携がうまくいくか未確認
 - novncのデフォルト設定をLocalScalingにしたい
-- ~eclipse Theiaの導入~(重くなりすぎるのでひとまず導入しない方向で）
-  -   - https://qiita.com/yosuke@github/items/328dbd778047499828f2#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
 - vscodeとの連携
   - Windows側にvscodeをインストールして，Remote Developmentで接続して実装する方法を試す
+  - vscodeからymlを指定してコンテナにアクセスする方法だと，コンテナ内のファイルへのアクセスに失敗した．`docker-compose up` でコンテナを起動してからそれを選択する方法だといけた
+    - こちらでいけることは確認できたが，vscodeのターミナルがrootにログインしてしまうのでubuntuをデフォルトにする方法を模索中
+
 
 ### Done
+- ~eclipse Theiaの導入~(重くなりすぎるのでひとまず導入しない方向で）
+  -   - https://qiita.com/yosuke@github/items/328dbd778047499828f2#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
 - コピペがnovncのClip BoardUIを介さないとだめっぽいのが何とかならないか．．->コピペ等したい場合はVNCクライアントで5900にアクセスすればいける
 - 起動後にnovncの設定で Scaling Modeを `Local Scaling` に変更するとブラウザサイズに合わせて画面サイズが変更される
   - ubuntuの解像度はdocker-compose.ymlで変更可能

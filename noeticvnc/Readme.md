@@ -16,6 +16,7 @@ $ docker-compose down
 ### アクセス方法
 - `docker-compose up -d` をホストで実行した後，http://localhost:8080 にブラウザでアクセスする
 - ubuntuのデスクトップにアクセスできるので，そのままLXTerminalを起動して必要な処理を呼び出す
+- localhost:2000でsshdがListenしているので，sshクライアントでubuntu:ubuntuにアクセスできる．
 
 ### ToDo
 - sigverseとの連携がうまくいくか未確認

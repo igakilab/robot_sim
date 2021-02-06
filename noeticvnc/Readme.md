@@ -16,7 +16,10 @@ $ docker-compose down
 
 ### アクセス方法
 - `docker-compose up -d` をホストで実行した後，http://localhost:8080 にブラウザでアクセスする
-- ubuntuのデスクトップにアクセスできるので，そのままLXTerminalを起動して必要な処理を呼び出す
+  - ubuntuのデスクトップにアクセスできるので，そのままLXTerminalを起動して必要な処理を呼び出す
+- localhost:5900 を対象に通常のVNCクライアントでもアクセスできる
+  - RealVNCで動作検証済み．コピペ等も問題なくできるっぽい
+  - https://www.realvnc.com/en/connect/download/viewer/
 - localhost:2000でsshdがListenしているので，sshクライアントでubuntu:ubuntuにアクセスできる．
 
 ### ToDo

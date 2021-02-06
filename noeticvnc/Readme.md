@@ -20,13 +20,13 @@ $ docker-compose down
 ### ToDo
 - sigverseとの連携がうまくいくか未確認
 - novncのデフォルト設定をLocalScalingにしたい
-- コピペがnovncのClip BoardUIを介さないとだめっぽいのが何とかならないか．．
-- eclipse Theiaの導入
+- ~eclipse Theiaの導入~(重くなりすぎるのでひとまず導入しない方向で）
+  -   - https://qiita.com/yosuke@github/items/328dbd778047499828f2#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
 - vscodeとの連携
-  - Windows側にvscodeをインストールして，Remote Developmentで接続して実装する方法を試してみたい．他にはjupyterやブラウザベースのvscode風のツールを導入して実装できるようにしている既存事例もあり．
-  - https://qiita.com/yosuke@github/items/328dbd778047499828f2#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
+  - Windows側にvscodeをインストールして，Remote Developmentで接続して実装する方法を試す
 
 ### Done
+- コピペがnovncのClip BoardUIを介さないとだめっぽいのが何とかならないか．．->コピペ等したい場合はVNCクライアントで5900にアクセスすればいける
 - 起動後にnovncの設定で Scaling Modeを `Local Scaling` に変更するとブラウザサイズに合わせて画面サイズが変更される
   - ubuntuの解像度はdocker-compose.ymlで変更可能
 - ~/catkin_ws を永続化し，初期化するように修正してみた

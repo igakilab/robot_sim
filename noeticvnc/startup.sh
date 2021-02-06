@@ -73,6 +73,7 @@ PASSWORD=
 HTTP_PASSWORD=
 
 # init ros workspace
+echo "-----init ros workspace --------"
 
 su - ubuntu
 
@@ -84,7 +85,7 @@ ln -sfn /catkin_ws /home/ubuntu/catkin_ws
 TARGET_ROS="noetic"
 echo "**Making workspace. Target ros-${TARGET_ROS}**"
 ROS_SETUP="/opt/ros/${TARGET_ROS}/setup.bash"
-echo "source ${ROS_SETUP}" >> ~/.bashrc
+#echo "source ${ROS_SETUP}" >> ~/.bashrc
 
 source ${ROS_SETUP}
 

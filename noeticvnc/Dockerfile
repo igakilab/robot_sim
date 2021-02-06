@@ -67,23 +67,17 @@ RUN sudo apt-get install -y --no-install-recommends ros-noetic-cv-camera \
 RUN sudo apt-get -yq clean \
     && sudo rm -rf /var/lib/apt/lists/*
 
-#init ws
-#COPY ./init_workspace.sh /home/ubuntu/setup_robot_programming/init_workspace.sh
-#RUN sudo chmod +x ~/setup_robot_programming/init_workspace.sh && bash ~/setup_robot_programming/init_workspace.sh
-
 COPY ./install_sigverse.sh /home/ubuntu/setup_robot_programming/install_sigverse.sh
 RUN sudo chmod +x ~/setup_robot_programming/install_sigverse.sh && bash ~/setup_robot_programming/install_sigverse.sh
 
 RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/setup_robot_programming/
 RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
 
-#COPY ./entrypoint.sh /home/ubuntu/setup_robot_programming/entrypoint.sh
-#RUN sudo chmod +x ~/setup_robot_programming/entrypoint.sh
-
 # Override entrypoint file
 USER root
 COPY ./startup.sh /startup.sh
 RUN sudo chmod +x /startup.sh
+USER ubuntu
 
 
 #ENV LANG ja_JP.UTF-8

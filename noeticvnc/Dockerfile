@@ -82,8 +82,9 @@ RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
 RUN sudo apt-get install -y gosu
 COPY ./startup.sh /startup.sh
 RUN sudo chmod u+x /startup.sh
+COPY ./lxterminal.desktop /home/ubuntu/Desktop/lxterminal.desktop
 
-WORKDIR /home/ubuntu/setup_robot_programming
+#WORKDIR /home/ubuntu/setup_robot_programming
 
 
 #ENV LANG ja_JP.UTF-8

@@ -5,6 +5,10 @@
 ### 準備
 - WSL2を使えるようにする
 - Docker Desktop for Windowsをインストールする
+- Visual Studio Codeをインストールする
+  - 公式からインストールしても良いが，複数のvscodeをインストールする場合はPortable Appをおすすめ
+  - https://portapps.io/app/vscode-portable/
+  - vscode起動後，Remote Containers プラグインを導入しておく
 
 ### 実行方法
 ```sh

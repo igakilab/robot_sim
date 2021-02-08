@@ -2,11 +2,16 @@
 - noeticvncコンテナ一つで，ros-noetic, novncを導入している
 - このコンテナはDocker Desktopなどでローカルに展開されることを前提としています．グローバルな仮想サーバなどでの動作は前提としていません（セキュリティ的にも）
 
+### 準備
+- WSL2を使えるようにする
+- Docker Desktop for Windowsをインストールする
+
 ### 実行方法
 ```sh
 $ cd noeticvnc
 $ docker-compose up -d
 ```
+- 動作内容を確認したいのであれば `-d` は不要です（foregroundでコンテナが開始します）
 
 ### 終了方法
 ```sh

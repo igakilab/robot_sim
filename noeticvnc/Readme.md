@@ -36,6 +36,8 @@ $ docker-compose down
 ### ToDo
 - sigverseとの連携がうまくいくか未確認
 - novncのデフォルト設定をLocalScalingにしたい
+- Timezoneの設定をどうするか検討
+- 画像処理等その他のテーマについての実装環境をどうするか
 
 ### Done
 - DesktopにLXTerminalのショートカット貼り付け

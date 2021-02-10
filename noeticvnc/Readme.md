@@ -9,6 +9,7 @@
   - 公式からインストールしても良いが，複数のvscodeをインストールする場合はPortable Appをおすすめ
   - https://portapps.io/app/vscode-portable/
   - vscode起動後，Remote Containers プラグインを導入しておく
+- (option) Windows TerminalをMS Storeでインストールすることをおすすめします
 
 ### 実行方法
 ```sh

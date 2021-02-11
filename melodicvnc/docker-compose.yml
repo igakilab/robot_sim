@@ -1,8 +1,8 @@
 version: '3'
 services:
-  noeticvnc:
+  melodicvnc:
     restart: always
-    container_name: noeticvnc
+    container_name: melodicvnc
     build: .
     volumes:
       - catkin_ws:/catkin_ws

@@ -75,6 +75,15 @@ ADD ./app /app
 
 USER ubuntu
 
+COPY ./install_sigverse.sh ./install_sigverse.sh
+RUN sudo chmod +x ./install_sigverse.sh && bash ./install_sigverse.sh
+
+WORKDIR /home/ubuntu/
+
+#RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/setup_robot_programming/
+RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
+
+
 ENTRYPOINT ["/app/startup.sh"]
 #CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
 

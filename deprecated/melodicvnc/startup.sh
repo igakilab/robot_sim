@@ -81,7 +81,7 @@ HTTP_PASSWORD=
 sudo gosu root ln -sfn /catkin_ws /home/ubuntu/catkin_ws
 
 # init workspace
-TARGET_ROS="noetic"
+TARGET_ROS="melodic"
 echo "**Making workspace. Target ros-${TARGET_ROS}**"
 #ROS_SETUP="/opt/ros/${TARGET_ROS}/setup.bash"
 #echo "source ${ROS_SETUP}" >> ~/.bashrc

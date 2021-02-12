@@ -1,8 +1,7 @@
 version: '3'
 services:
-  noeticvnc:
-    restart: always
-    container_name: noeticvnc
+  melodicvnc4:
+    container_name: melodicvnc4
     build: .
     volumes:
       - catkin_ws:/catkin_ws
@@ -12,12 +11,10 @@ services:
       - "9090:9090" 
       - "50001:50001"
     environment:
-      - shm-size="512m"
-      - RESOLUTION=1280x1024
       - USER=ubuntu
+      - RESOLUTION=1024x768
       - TZ=Asia/Tokyo
-    #command:
-      #- /home/ubuntu/setup_robot_programming/entrypoint.sh
+    tty: true
 
 volumes:
   catkin_ws:

@@ -1,13 +1,14 @@
 version: '3'
 services:
-  noeticvnc:
+  melodicvnc:
     restart: always
-    container_name: noeticvnc
+    container_name: melodicvnc
     build: .
     volumes:
       - catkin_ws:/catkin_ws
     ports:
-      - "8000:8080"
+      - "2000:22"
+      - "8000:80"
       - "5900:5900"
       - "9090:9090" 
       - "50001:50001"

@@ -1,11 +1,10 @@
-FROM ros:noetic-ros-base
-
+FROM ros:melodic-ros-base
 LABEL maintainer="IGK"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
-RUN sudo apt-get update -y
+
 RUN sudo apt-get install git -y \
 	&& cd /root && git clone https://github.com/KMiyawaki/setup_robot_programming.git
 
@@ -27,25 +26,25 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/
 RUN sudo chmod +x /bin/tini
 
 #ros Packages
-RUN sudo apt-get install -y --no-install-recommends ros-noetic-cv-camera \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-image-transport \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-image-transport-plugins \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-joint-state-publisher-gui \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-joy \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-laser-filters \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-laser-pipeline \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-map-server \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-mouse-teleop \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-navigation \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-robot-state-publisher \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-rosbash \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-rviz \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-slam-gmapping \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-stage-ros \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-rosbridge-suite \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-teleop-twist-joy \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-teleop-twist-keyboard \
-	&& sudo apt-get install -y --no-install-recommends ros-noetic-xacro
+RUN sudo apt-get install -y --no-install-recommends ros-melodic-cv-camera \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-image-transport \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-image-transport-plugins \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-joint-state-publisher-gui \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-joy \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-laser-filters \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-laser-pipeline \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-map-server \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-mouse-teleop \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-navigation \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-robot-state-publisher \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-rosbash \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-rviz \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-slam-gmapping \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-stage-ros \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-rosbridge-suite \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-teleop-twist-joy \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-teleop-twist-keyboard \
+	&& sudo apt-get install -y --no-install-recommends ros-melodic-xacro
 
 RUN apt-get update && \
     # Install the required packages for desktop    
@@ -86,3 +85,11 @@ RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
 
 
 ENTRYPOINT ["/app/startup.sh"]
+#CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
+
+#ADD ./startup.sh ./startup.sh
+
+#USER ubuntu
+
+#ENTRYPOINT ["/root/setup_robot_programming/startup.sh"]
+#EXPOSE 8080

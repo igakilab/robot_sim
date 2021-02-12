@@ -1,46 +1,30 @@
-FROM dorowu/ubuntu-desktop-lxde-vnc:focal
+FROM ros:noetic-ros-base
+
 LABEL maintainer="IGK"
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "Set disable_coredump false" >> /etc/sudo.conf
-RUN sed -i 's@archive.ubuntu.com@ftp.jaist.ac.jp/pub/Linux@g' /etc/apt/sources.list \
-    && apt-get update -yq \
-    && apt-get install -y --no-install-recommends \
-    git locales vim sudo bash-completion tzdata wget zip unzip rsync \
-    iputils-ping net-tools x11-apps \
-    && apt-get -yq clean \
-    && rm -rf /var/lib/apt/lists/*
+RUN sudo apt-get update -y
+RUN sudo apt-get install git -y \
+	&& cd /root && git clone https://github.com/KMiyawaki/setup_robot_programming.git
 
-RUN locale-gen ja_JP.UTF-8 && useradd --create-home --home-dir /home/ubuntu --shell /bin/bash --user-group --groups adm,sudo ubuntu \
+WORKDIR /root/setup_robot_programming
+RUN ./stop_update.sh
+RUN ./install_basic_packages.sh
+RUN ./install_python_packages.sh
+RUN ./install_chrome.sh
+
+RUN useradd --create-home --home-dir /home/ubuntu --shell /bin/bash --user-group --groups adm,sudo ubuntu \
     && echo ubuntu:ubuntu | chpasswd \
     && echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER ubuntu
-WORKDIR /home/ubuntu/setup_robot_programming
+RUN sudo apt-get install -y gosu
 
-## ros-noetic setup
-
-COPY ./ros-noetic-desktop.sh /home/ubuntu/setup_robot_programming/ros-noetic-desktop.sh
-RUN sudo chmod +x ~/setup_robot_programming/ros-noetic-desktop.sh \
-    && bash ~/setup_robot_programming/ros-noetic-desktop.sh \
-    && sudo rm -rf /var/lib/apt/lists/*
-
-##############################
-
-#Basic Package
-RUN sudo apt-get update -y && sudo apt-get upgrade -y
-RUN sudo apt-get install -y --no-install-recommends curl python3-pip python3-setuptools
-#sudo apt-get install -y --no-install-recommends openssh-server x11-xserver-utils dbus-x11
-
-#Python Packages
-RUN sudo apt-get install -y --no-install-recommends python-tk
-RUN sudo /usr/bin/python3 -m pip install pylint -U \
-	&& sudo /usr/bin/python3 -m pip install autopep8 -U \
-	&& sudo /usr/bin/python3 -m pip install autoflake -U
-#	&& sudo /usr/bin/python2 -m pip install pylint -U \
-#	&& sudo /usr/bin/python2 -m pip install autopep8 -U \
-#	&& sudo /usr/bin/python2 -m pip install autoflake -U \
+# tini to fix subreap
+ARG TINI_VERSION=v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
+RUN sudo chmod +x /bin/tini
 
 #ros Packages
 RUN sudo apt-get install -y --no-install-recommends ros-noetic-cv-camera \
@@ -63,42 +47,42 @@ RUN sudo apt-get install -y --no-install-recommends ros-noetic-cv-camera \
 	&& sudo apt-get install -y --no-install-recommends ros-noetic-teleop-twist-keyboard \
 	&& sudo apt-get install -y --no-install-recommends ros-noetic-xacro
 
-#Clean
-RUN sudo apt-get -yq clean \
-    && sudo rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    # Install the required packages for desktop    
+    apt-get install -y \
+      supervisor \
+      xvfb \
+      xfce4 \
+      x11vnc \
+      && \
+    # Install utilities(optional).
+    apt-get install -y \
+      wget \
+      curl \
+      net-tools \
+      vim-tiny \
+      xfce4-terminal \
+      tzdata rsync wget supervisor
+RUN apt-get clean && \
+    rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-COPY ./install_sigverse.sh /home/ubuntu/setup_robot_programming/install_sigverse.sh
-RUN sudo chmod +x ~/setup_robot_programming/install_sigverse.sh && bash ~/setup_robot_programming/install_sigverse.sh
+# Install noVNC
+RUN mkdir -p /opt/noVNC/utils/websockify && \
+    wget -qO- "http://github.com/novnc/noVNC/tarball/master" | tar -zx --strip-components=1 -C /opt/noVNC && \
+    wget -qO- "https://github.com/novnc/websockify/tarball/master" | tar -zx --strip-components=1 -C /opt/noVNC/utils/websockify && \
+    ln -s /opt/noVNC/vnc.html /opt/noVNC/index.html
 
-RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/setup_robot_programming/
+ADD ./app /app
+
+USER ubuntu
+
+COPY ./install_sigverse.sh ./install_sigverse.sh
+RUN sudo chmod +x ./install_sigverse.sh && bash ./install_sigverse.sh
+
+WORKDIR /home/ubuntu/
+
+#RUN sudo chown -R ubuntu:ubuntu /home/ubuntu/setup_robot_programming/
 RUN git clone https://github.com/SIGVerse/sigverse_ros_package.git
 
-#RUN sudo apt-get install -y openssh-server
-#RUN sudo mkdir -p /var/run/sshd
-#COPY ssh.conf /etc/supervisor/conf.d/ssh.conf
 
-# Override entrypoint file
-#USER root
-RUN sudo apt-get install -y gosu
-COPY ./startup.sh /startup.sh
-RUN sudo chmod u+x /startup.sh
-COPY ./lxterminal.desktop /home/ubuntu/Desktop/lxterminal.desktop
-
-#WORKDIR /home/ubuntu/setup_robot_programming
-
-
-#ENV LANG ja_JP.UTF-8
-#ENV LIBGL_ALWAYS_INDIRECT=0
-#ENV DISPLAY host.docker.internal:0.0
-
-#WORKDIR /home/ubuntu
-
-#ENTRYPOINT [ "/home/ubuntu/setup_robot_programming/entrypoint.sh" ]
-
-#Reference
-# Timezone https://qiita.com/rururu_kenken/items/972314402d588e073d40
-# https://github.com/KMiyawaki/setup_robot_programming
-# OpenGL https://b.ueda.tech/?post=20190802
-# https://github.com/Tiryoh/docker-ros-desktop-vnc/blob/master/noetic/Dockerfile
-# sudo.conf https://qiita.com/tukiyo3/items/3642a99bd971fa829246
-# https://github.com/fcwu/docker-ubuntu-vnc-desktop
+ENTRYPOINT ["/app/startup.sh"]

@@ -1,0 +1,22 @@
+version: '3'
+services:
+  melodicvnc3:
+    restart: always
+    container_name: melodicvnc3
+    build: .
+    volumes:
+      - catkin_ws:/catkin_ws
+    ports:
+      - "8000:8080"
+      - "5900:5900"
+      - "9090:9090" 
+      - "50001:50001"
+    environment:
+      - USER=ubuntu
+      - RESOLUTION=1024x768
+      - TZ=Asia/Tokyo
+    #command:
+      #- /home/ubuntu/setup_robot_programming/entrypoint.sh
+
+volumes:
+  catkin_ws:

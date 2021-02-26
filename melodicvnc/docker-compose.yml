@@ -1,7 +1,7 @@
 version: '3'
 services:
-  melodicvnc4:
-    container_name: melodicvnc4
+  melodicvnc:
+    container_name: melodicvnc
     build: .
     volumes:
       - catkin_ws:/catkin_ws

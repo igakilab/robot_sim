@@ -1,7 +1,7 @@
 version: '3'
 services:
-  melodicvnc3:
-    container_name: melodicvnc3
+  wbrtest:
+    container_name: wbrtest
     build: .
     volumes:
       - catkin_ws:/catkin_ws

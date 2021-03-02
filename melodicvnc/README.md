@@ -11,9 +11,9 @@
 $ cd melodicvnc
 $ docker-compose build
 ```
-- かなり時間がかかります
-- 本番ではビルドしたものをDocker Hubにアップロードして使えるようにする予定
-- ビルドが成功したら下記コマンドでコンテナを実行する
+- ビルドしたものがDocker HUBにアップロードされており，それをダウンロードして実行する
+  - 対象のコンテナイメージのDockerfileはこちら
+  - https://github.com/igakilab/melodicvnc
 
 ```sh
 $ docker-compose up
@@ -50,6 +50,7 @@ $ docker-compose up
 - コピペがnovncのClip BoardUIを介さないとだめっぽいのが何とかならないか．．->コピペ等したい場合はVNCクライアントで5900にアクセスすればいけるが，たまにうまくいかないことがあるような感じなので確認する
 - 起動後にnovncの設定で Scaling Modeを `Local Scaling` に変更するとブラウザサイズに合わせて画面サイズが変更される．解像度設定を確認しておく
 - コンテナ内vscodeの挙動が怪しい．ファイルタブをクリックすると出てくるメニューが斜めになったりするので確認しておく．
+- OpenCVを使えるように設定しておきたい
 
 ### Done
 - Timezoneの設定をどうするか検討

@@ -9,7 +9,7 @@
 - Windows Terminalでmelodicvncにcdし，下記コマンドを実行する
 ```sh
 $ cd melodicvnc
-$ docker-compose build
+$ docker-compose pull
 ```
 - ビルドしたものがDocker HUBにアップロードされており，それをダウンロードして実行する
   - 対象のコンテナイメージのDockerfileはこちら
